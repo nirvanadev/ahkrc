@@ -38,13 +38,19 @@ F6::Run, Vivaldi
 #IfWinNotExist
 
 ; Add some vim-like arrow keys on HJKL
-;	(Avoids Vivaldi since I have vimium doing it instead)
-#IfWinNotActive ahk_exe vivaldi.exe
 ^j::Send, {Down}
 ^k::Send, {Up}
 ^h::Send, {Left}
 ^l::Send, {Right}
-#IfWinNotActive
+
+; Make Ctrl+Shift+K still work without affecting Ctrl+K mapping above
+#IfWinActive ahk_exe vivaldi.exe
+^+k::
+	Hotkey, ^k,,Off
+	Send, ^k
+	Hotkey, ^k,,On
+return
+#IfWinActive
 
 ; Quicker tab switching
 ^$]::send, ^{Tab}
