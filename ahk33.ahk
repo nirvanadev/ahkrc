@@ -20,13 +20,6 @@ F3::    ; Last window
 	WinActivateBottom, ahk_class %ActiveClass%
 return
 
-; Quickly reset my FancyZones windows
-; F4::
-; 	WinGet, Array, List, ahk_pid 21360
-; 	Loop, %Array%
-;    		WinActivate, % "ahk_id " . Array%A_Index%
-; return
-
 ; Toggle current window maximization
 F5::
 	WinGet MX, MinMax, A
@@ -37,13 +30,6 @@ return
 
 ; PrintScreen as SnipTool
 PrintScreen::Send,#S
-
-; Quickly reposition browser and code editor if they get messed up
-;F4::
-;^Numpad5::
-;	WinMove, ahk_exe msedge.exe, , 1295, 0 , 2556, 2108
-;	WinMove, ahk_exe WindowsTerminal.exe, , 0, 0 , 1306, 2120
-;return
 
 ; Handle Terminal switching/launching
 #IfWinExist ahk_exe WindowsTerminal.exe
@@ -77,27 +63,6 @@ F11::Run, explorer.exe shell:::{20D04FE0-3AEA-1069-A2D8-08002B30309D}
 >^h::Send, {Left}
 >^l::Send, {Right}
 
-; Make Ctrl+Shift+K still work without affecting Ctrl+K mapping above
-; #IfWinActive ahk_exe vivaldi.exe
-; PgUp::
-; 	Hotkey, ^k,,Off
-; 	Send, ^k
-; 	Hotkey, ^k,,On
-; return
-; #IfWinActive
-
-; Allow for orgmode mappings when terminal is active
-;#IfWinActive ahk_exe WindowsTerminal.exe
-;^k::
-;PgUp::
-;	Hotkey, ^k,,Off
-;	Send, ^k
-;	Hotkey, ^k,,On
-;return
-;^j::
-;PgDn::
-;	Hotkey, ^j,,Off
-;	Send, ^j
-;	Hotkey, ^j,,On
-;return
-;#IfWinActive
+; Tab navigation
+>^]::Send, ^{Tab}
+>^[::Send, ^+{Tab}
