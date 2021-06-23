@@ -54,14 +54,14 @@ F8::GroupActivate, vivaldi, R
 F8::Run, Vivaldi
 #IfWinNotExist
 
-; Handle Outlook switching/launching
-; #IfWinExist ahk_exe OUTLOOK.EXE
-; F9::WinActivate
-; #IfWinExist
-; 
-; #IfWinNotExist ahk_exe OUTLOOK.EXE
-; F9::Run, Outlook
-; #IfWinNotExist
+; Make Alt+k still send Ctrl+k (Slack)
+; #IfWinActive ahk_exe vivaldi.exe
+!k::
+	Hotkey, ^k,,Off
+	Send, ^k
+	Hotkey, ^k,,On
+return
+; #IfWinActive
 
 ; Handle Teams switching/launching
 #IfWinExist ahk_exe Teams.exe
@@ -90,11 +90,16 @@ F10::GroupActivate, expWin, R
 #IfWinExist
 
 ; Add some vim-like arrow keys on HJKL
->^j::Send, {Down}
->^k::Send, {Up}
->^h::Send, {Left}
->^l::Send, {Right}
+^j::Send, {Down}
+^k::Send, {Up}
+^h::Send, {Left}
+^l::Send, {Right}
 
 ; Tab navigation
->^]::Send, ^{Tab}
->^[::Send, ^+{Tab}
+^]::Send, ^{Tab}
+^[::Send, ^+{Tab}
+
+; Tab navigation for clients when using Synergy
+; LControl & ]::Send, {LControl down}{Tab}
+; LControl & [::Send, {LControl down}{Shift down}{Tab}{Shift up}
+; LControl Up::Send, {LControl up}
